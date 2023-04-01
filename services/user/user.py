@@ -8,7 +8,7 @@ app = Flask(__name__)
 database_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 print(database_path)
 
-with open("{}/database/users.json".format(database_path), "r") as f:
+with open("{}/user/database/users.json".format(database_path), "r") as f:
     usr = json.load(f)
 
 @app.route("/", methods=['GET'])

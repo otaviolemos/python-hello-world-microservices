@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 database_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
-with open('{}/database/todo.json'.format(database_path), "r") as jsf:
+with open('{}/todo/database/todo.json'.format(database_path), "r") as jsf:
     todo_list = json.load(jsf)
 
 @app.route('/', methods=['GET'])
@@ -15,7 +15,7 @@ def hello():
 
     return "Todo service is up"
 
-@app.route('/lists', methods=['GET'])
+@app.route('/todo', methods=['GET'])
 def show_lists():
     ''' Displays all the lists '''
 
@@ -25,14 +25,14 @@ def show_lists():
             tlists.append(lname)
     return jsonify(lists=tlists)
 
-@app.route('/lists/<username>', methods=['GET'])
-def user_list(username):
+@app.route('/todo/<userid>', methods=['GET'])
+def user_list(userid):
     ''' Returns a user oriented list '''
 
-    if username not in todo_list:
+    if userid not in todo_list:
         return "No list found"
 
-    return jsonify(todo_list[username])
+    return jsonify(todo_list[userid])
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)

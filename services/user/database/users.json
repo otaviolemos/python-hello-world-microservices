@@ -1,0 +1,14 @@
+{
+    "id_1": {
+        "name":"Otavio Lemos",
+        "verified": 1
+    },
+    "id_2": {
+        "name":"Maria Martins",
+        "verified": 1
+    },
+    "id_3": {
+        "name":"Lucas Rodrigues",
+        "verified": 0
+    }
+}
