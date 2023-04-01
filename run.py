@@ -13,10 +13,10 @@ def launchsvc(svc,host,port):
     addr = "localhost:{}".format(port)
     resp = checkport(host, int(port))
     if resp != 0:
-        print "Service {} not running, starting service at port {} on host {}".format(svc, port, host)
+        print("Service {} not running, starting service at port {} on host {}".format(svc, port, host))
         os.system('python '+ SERVICE_DIR + svc + '.py &')
     else:
-        print "Service {} running at port {} on host {}".format(svc, port, host)
+        print("Service {} running at port {} on host {}".format(svc, port, host))
 
 def walkthrough(section,obj):
     if 'preload' in section:
