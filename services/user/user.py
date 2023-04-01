@@ -8,9 +8,6 @@ app = Flask(__name__)
 database_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 print(database_path)
 
-with open("{}/user/database/users.json".format(database_path), "r") as f:
-    usr = json.load(f)
-
 @app.route("/", methods=['GET'])
 def hello():
     ''' Greet the user '''
@@ -20,19 +17,23 @@ def hello():
 @app.route('/users', methods=['GET'])
 def users():
     ''' Returns the list of users '''
-
-    resp = make_response(json.dumps(usr, sort_keys=True, indent=4))
+    with open("{}/user/database/users.json".format(database_path), "r") as f:
+        users = json.load(f)
+    
+    resp = make_response(json.dumps(users, sort_keys=True, indent=4))
     resp.headers['Content-Type']="application/json"
     return resp
 
-@app.route('/users/<username>', methods=['GET'])
-def user_data(username):
+@app.route('/users/<userid>', methods=['GET'])
+def user_data(userid):
     ''' Returns info about a specific user '''
+    with open("{}/user/database/users.json".format(database_path), "r") as f:
+        users = json.load(f)
 
-    if username not in usr:
+    if userid not in users:
         return "Not found"
 
-    return jsonify(usr[username])
+    return jsonify(users[userid])
 
 @app.route('/users/<username>/lists', methods=['GET'])
 def user_lists(username):

@@ -6,9 +6,6 @@ app = Flask(__name__)
 
 database_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
-with open('{}/todo/database/todo.json'.format(database_path), "r") as jsf:
-    todo_list = json.load(jsf)
-
 @app.route('/', methods=['GET'])
 def hello():
     ''' Greet the user '''
@@ -18,6 +15,8 @@ def hello():
 @app.route('/todo', methods=['GET'])
 def show_lists():
     ''' Displays all the lists '''
+    with open('{}/todo/database/todo.json'.format(database_path), "r") as jsf:
+        todo_list = json.load(jsf)
 
     tlists = []
     for username in todo_list:
@@ -28,6 +27,8 @@ def show_lists():
 @app.route('/todo/<userid>', methods=['GET'])
 def user_list(userid):
     ''' Returns a user oriented list '''
+    with open('{}/todo/database/todo.json'.format(database_path), "r") as jsf:
+        todo_list = json.load(jsf)
 
     if userid not in todo_list:
         return "No list found"
