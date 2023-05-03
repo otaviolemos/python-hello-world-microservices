@@ -17,7 +17,7 @@ def hello():
 @app.route('/users', methods=['GET'])
 def users():
     ''' Returns the list of users '''
-    with open("{}/user/database/users.json".format(database_path), "r") as f:
+    with open("{}/users/database/users.json".format(database_path), "r") as f:
         users = json.load(f)
     
     resp = make_response(json.dumps(users, sort_keys=True, indent=4))
@@ -27,7 +27,7 @@ def users():
 @app.route('/users/<userid>', methods=['GET'])
 def user_data(userid):
     ''' Returns info about a specific user '''
-    with open("{}/user/database/users.json".format(database_path), "r") as f:
+    with open("{}/users/database/users.json".format(database_path), "r") as f:
         users = json.load(f)
 
     if userid not in users:
